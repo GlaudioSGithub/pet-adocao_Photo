@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdotaPets - Sistema de Adoção de Pets</title>
+
+    <!-- Bootstrap e Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- CSS customizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container mt-5 text-center">
+        <h1 class="mb-4 fade-in-title">
+            <i class="fas fa-paw text-primary"></i> Bem-vindo ao <strong>AdotaPets</strong>
+        </h1>
+
+        <!-- Banner centralizado e responsivo -->
+        <div class="banner-wrapper">
+        <img src="{{ url_for('static', filename='images/AdotaPets.png') }}"
+            alt="Banner AdotaPets"
+            class="banner">
+        </div>
+
+        <!-- Botões -->
+        <div class="btn-group-flex mt-3 fade-in-buttons">
+            <a href="/adicionar" class="btn btn-primary btn-custom mx-2 mb-3 mb-md-0">
+                <i class="fas fa-plus-circle"></i> Cadastrar um pet
+            </a>
+            <a href="/listar" class="btn btn-success btn-custom mx-2 mb-3 mb-md-0">
+                <i class="fas fa-list"></i> Listar pets disponíveis
+            </a>
+            <a href="/buscar" class="btn btn-info btn-custom mx-2 mb-3 mb-md-0">
+                <i class="fas fa-search"></i> Buscar pets
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
