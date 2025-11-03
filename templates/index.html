@@ -11,6 +11,9 @@
 
     <!-- CSS customizado -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#00bfa6">
 </head>
 
 <body>
@@ -21,10 +24,11 @@
 
         <!-- Banner centralizado e responsivo -->
         <div class="banner-wrapper">
-        <img src="{{ url_for('static', filename='images/AdotaPets.png') }}"
-            alt="Banner AdotaPets"
-            class="banner">
+            <img src="{{ url_for('static', filename='images/AdotaPets.png') }}" 
+                alt="Banner AdotaPets" 
+                class="banner">
         </div>
+
 
         <!-- Botões -->
         <div class="btn-group-flex mt-3 fade-in-buttons">
@@ -45,3 +49,9 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
+
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/service-worker.js');
+}
+</script>

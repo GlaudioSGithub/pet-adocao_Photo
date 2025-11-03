@@ -1,51 +1,56 @@
 /* ======= Estilo Geral ======= */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita barras horizontais */
+    overflow-y: auto; /* Permite rolagem normal */
+    height: 100%;
+}
+
 body {
     background: linear-gradient(to bottom, #fdfbfb, #ebedee);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
     text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     padding: 20px;
-    margin: 0;
-    overflow-x: hidden; /* Evita barras horizontais */
 }
 
 /* ======= Título ======= */
 .fade-in-title {
     animation: fadeInDown 1s ease-in-out;
     color: #2c3e50;
+    margin-top: 20px;
 }
 
-/* evita rolagem horizontal */
-html, body { margin:0; padding:0; overflow-x:hidden; }
-
-/* wrapper central que limita largura */
+/* ======= Banner ======= */
 .banner-wrapper {
-  width: 100%;
-  max-width: 360px;     /* ajuste final aqui */
-  margin: 20px auto;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;     /* garante que nada "vaze" */
+    width: 100%;
+    max-width: 340px;      /* Mantém responsivo */
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-/* imagem responsiva dentro do wrapper */
 .banner {
-  display: block;
-  width: 100%;          /* ocupa 100% do wrapper */
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;  /* mantém proporção sem deformar */
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-  transition: transform .25s ease;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 12px;
+    object-fit: contain;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    transition: transform 0.25s ease;
 }
 
-.banner:hover { transform: scale(1.03); }
-
-/* segurança para evitar que imagens grandes forcem scroll */
-img { max-width: 100%; height: auto; display: block; }
-
+.banner:hover {
+    transform: scale(1.03);
+}
 
 /* ======= Botões ======= */
 .btn-custom {
@@ -54,6 +59,7 @@ img { max-width: 100%; height: auto; display: block; }
     padding: 10px 18px;
     border-radius: 25px;
     transition: all 0.3s ease;
+    margin: 8px;
 }
 
 .btn-custom:hover {
@@ -61,7 +67,7 @@ img { max-width: 100%; height: auto; display: block; }
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* ======= Responsividade ======= */
+/* ======= Grupo de Botões ======= */
 .btn-group-flex {
     display: flex;
     flex-direction: column;
@@ -73,6 +79,13 @@ img { max-width: 100%; height: auto; display: block; }
         flex-direction: row;
         justify-content: center;
     }
+}
+
+/* ======= Imagens Gerais ======= */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* ======= Animações ======= */

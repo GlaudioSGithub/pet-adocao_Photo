@@ -46,75 +46,78 @@
 
         {% if pets %}
             <h2 class="mt-5">Resultados:</h2>
-            <!-- Tabela de Resultados -->
+            <!-- Wrapper que torna a tabela responsiva -->
             <div class="card shadow p-4 mt-4">
-                <table class="table table-striped align-middle">
-                    <thead>
-                        <tr>
-                            <th>Imagem</th>
-                            <th>Nome</th>
-                            <th>Idade</th>
-                            <th>Raça</th>
-                            <th>Descrição</th>
-                            <th>Status</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for pet in pets %}
-                        <tr>
-                            <td>
-                                {% if pet[7] %}
-                                        <!-- Miniatura da foto -->
-                                        <img src="/{{ pet[7].replace('\\','/') }}"
-                                            alt="Foto de {{ pet[1] }}"
-                                            class="img-thumbnail"
-                                            style="width: 80px; height: auto; cursor: pointer;"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#fotoModal{{ pet[0] }}">
+            <div class="table-responsive"> <!-- 👈 Adiciona rolagem horizontal controlada -->
+                <table class="table table-striped align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Raça</th>
+                    <th>Descrição</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pet in pets %}
+                    <tr>
+                    <td>
+                                        {% if pet[7] %}
+                                            <!-- Miniatura da foto -->
+                                            <img src="/{{ pet[7].replace('\\','/') }}"
+                                                alt="Foto de {{ pet[1] }}"
+                                                class="img-thumbnail"
+                                                style="width: 80px; height: auto; cursor: pointer;"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#fotoModal{{ pet[0] }}">
 
-                                        <div class="modal fade" id="fotoModal{{ pet[0] }}" tabindex="-1" aria-labelledby="fotoModalLabel{{ pet[0] }}" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="fotoModalLabel{{ pet[0] }}">Foto de {{ pet[1] }}</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                                                    </div>
-                                                    <div class="modal-body text-center">
-                                                        <img src="/{{ pet[7].replace('\\','/') }}" alt="Foto de {{ pet[1] }}" class="img-fluid rounded">
+                                            <div class="modal fade" id="fotoModal{{ pet[0] }}" tabindex="-1" aria-labelledby="fotoModalLabel{{ pet[0] }}" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="fotoModalLabel{{ pet[0] }}">Foto de {{ pet[1] }}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                                        </div>
+                                                        <div class="modal-body text-center">
+                                                            <img src="/{{ pet[7].replace('\\','/') }}" alt="Foto de {{ pet[1] }}" class="img-fluid rounded">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                {% else %}
-                                    <i class="fas fa-image text-muted"></i> Sem foto
-                                {% endif %}
-                            </td>
-                            <td>{{ pet[1] }}</td>
-                            <td>{{ pet[2] }}</td>
-                            <td>{{ pet[3] }}</td>
-                            <td>{{ pet[4] }}</td>
-                            <td>
-                                {% if pet[5] == 1 %}
-                                    <span class="badge bg-success"><i class="fas fa-check-circle"></i> Adotado</span>
-                                {% else %}
-                                    <span class="badge bg-warning"><i class="fas fa-paw"></i> Disponível</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if pet[5] == 0 %}
-                                    <a href="/adotar/{{ pet[0] }}" class="btn btn-success btn-sm">
-                                        <i class="fas fa-paw"></i> Adotar
-                                    </a>
-                                {% else %}
-                                    <span class="text-muted">Sem ações</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
+                                        {% else %}
+                                            <span class="text-muted">Sem foto</span>
+                                        {% endif %}
+                    </td>
+                    <td>{{ pet[1] }}</td>
+                    <td>{{ pet[2] }}</td>
+                    <td>{{ pet[3] }}</td>
+                    <td style="white-space: normal;">{{ pet[4] }}</td>
+                    <td>
+                        {% if pet[5] == 1 %}
+                        <span class="badge bg-success"><i class="fas fa-check-circle"></i> Adotado</span>
+                        {% else %}
+                        <span class="badge bg-warning text-dark"><i class="fas fa-paw"></i> Disponível</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if pet[5] == 0 %}
+                        <a href="/adotar/{{ pet[0] }}" class="btn btn-success btn-sm">
+                            <i class="fas fa-paw"></i> Adotar
+                        </a>
+                        {% else %}
+                        <span class="text-muted small">Sem ações</span>
+                        {% endif %}
+                    </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
                 </table>
             </div>
+            </div>
+
         {% elif pets is not none %}
             <p class="mt-5 text-danger">Nenhum pet encontrado.</p>
         {% endif %}
@@ -147,5 +150,34 @@
             modalImg.src = src;
         });
     </script>
+
+    <script>
+        function abrirImagem(src) {
+        const modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = 0;
+        modal.style.left = 0;
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.background = 'rgba(0,0,0,0.8)';
+        modal.style.display = 'flex';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+        modal.style.zIndex = 9999;
+
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '90%';
+        img.style.maxHeight = '90%';
+        img.style.borderRadius = '12px';
+        img.style.boxShadow = '0 0 20px rgba(255,255,255,0.3)';
+        img.style.objectFit = 'contain';
+
+        modal.appendChild(img);
+        modal.onclick = () => modal.remove();
+        document.body.appendChild(modal);
+        }
+    </script>
+
 </body>
 </html>
