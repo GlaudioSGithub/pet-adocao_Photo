@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <title>Listar Pets</title>
 </head>
 <body>
@@ -13,100 +16,110 @@
             <i class="fas fa-paw"></i> Lista de Pets
         </h1>
 
-        <!-- Card para tabela de pets -->
         <div class="card shadow p-4">
-            <!-- Tabela de Pets -->
             <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead>
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="table-dark">
                         <tr>
                             <th>Foto</th>
                             <th>Nome</th>
                             <th>Idade</th>
                             <th>Raça</th>
                             <th>Descrição</th>
+                            <th>Responsável</th>
+                            <th>Contato</th>
                             <th>Status</th>
-                            <th>Data da Adoção</th> <!-- Adicionado coluna para data -->
+                            <th>Data de Adoção</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for pet in pets %}
-                            <tr>
-                                <td>
-                                        {% if pet[7] %}
-                                            <!-- Miniatura da foto -->
-                                            <img src="/{{ pet[7].replace('\\','/') }}"
-                                                alt="Foto de {{ pet[1] }}"
-                                                class="img-thumbnail"
-                                                style="width: 80px; height: auto; cursor: pointer;"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#fotoModal{{ pet[0] }}">
+                        <tr>
+                            <!-- Coluna da Foto -->
+                            <td class="text-center align-middle">
+                                {% if pet[5] %}
+                                    <img src="/{{ pet[5].replace('\\','/') }}"
+                                        alt="Foto de {{ pet[1] }}"
+                                        class="img-thumbnail"
+                                        style="width: 80px; height: auto; cursor: pointer;"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#fotoModal{{ pet[0] }}">
 
-                                            <div class="modal fade" id="fotoModal{{ pet[0] }}" tabindex="-1" aria-labelledby="fotoModalLabel{{ pet[0] }}" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="fotoModalLabel{{ pet[0] }}">Foto de {{ pet[1] }}</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                                                        </div>
-                                                        <div class="modal-body text-center">
-                                                            <img src="/{{ pet[7].replace('\\','/') }}" alt="Foto de {{ pet[1] }}" class="img-fluid rounded">
-                                                        </div>
-                                                    </div>
+                                    <!-- Modal para ampliar imagem -->
+                                    <div class="modal fade" id="fotoModal{{ pet[0] }}" tabindex="-1" aria-labelledby="fotoModalLabel{{ pet[0] }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="fotoModalLabel{{ pet[0] }}">Foto de {{ pet[1] }}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                                </div>
+                                                <div class="modal-body text-center">
+                                                    <img src="/{{ pet[5].replace('\\','/') }}" alt="Foto de {{ pet[1] }}" class="img-fluid rounded shadow">
                                                 </div>
                                             </div>
-                                        {% else %}
-                                            <span class="text-muted">Sem foto</span>
-                                        {% endif %}
-                                    </td>
-                                <td>{{ pet[1] }}</td>
-                                <td>{{ pet[2] }}</td>
-                                <td>{{ pet[3] }}</td>
-                                <td>{{ pet[4] }}</td>
-                                <td>
-                                    {% if pet[5] == 1 %}
-                                        <span class="badge bg-success"><i class="fas fa-check-circle"></i> Adotado</span>
-                                    {% else %}
-                                        <span class="badge bg-warning"><i class="fas fa-paw"></i> Disponível</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if pet[5] == 1 %}
-                                        <!-- Exibe a data da adoção se o pet foi adotado -->
-                                        <span class="badge bg-info">{{ pet[6] }}</span> <!-- Supondo que pet[6] seja a data de adoção -->
-                                    {% else %}
-                                        <span class="text-muted">Não adotado</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if pet[5] == 0 %}
-                                        <!-- Botões de Adotar, Editar e Excluir -->
-                                        <a href="/adotar/{{ pet[0] }}" class="btn btn-success btn-sm mb-2">
-                                            <i class="fas fa-paw"></i> Adotar
-                                        </a>
-                                        <a href="/editar/{{ pet[0] }}" class="btn btn-warning btn-sm mb-2">
-                                            <i class="fas fa-edit"></i> Editar
-                                        </a>
-                                        <a href="/excluir/{{ pet[0] }}" class="btn btn-danger btn-sm mb-2">
-                                            <i class="fas fa-trash-alt"></i> Excluir
-                                        </a>
-                                    {% else %}
-                                        <!-- Apenas a opção de voltar se o pet foi adotado -->
-                                        <span class="text-muted">Sem ações disponíveis</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <span class="text-muted">Sem foto</span>
+                                {% endif %}
+                            </td>
+
+                            <!-- Demais colunas -->
+                            <td>{{ pet[1] }}</td>
+                            <td>{{ pet[2] }} anos</td>
+                            <td>{{ pet[3] }}</td>
+                            <td>{{ pet[4] }}</td>
+                            <td>{{ pet[6] if pet[6] else '-' }}</td>
+                            <td>{{ pet[7] if pet[7] else '-' }}</td>
+
+                            <!-- Status -->
+                            <td>
+                                {% if pet[8] == 1 %}
+                                    <span class="badge bg-success">Adotado</span>
+                                {% else %}
+                                    <span class="badge bg-warning text-dark">Disponível</span>
+                                {% endif %}
+                            </td>
+                            
+                            <!-- Data de Adoção -->
+                            <td>
+                                {% if pet[8] == 1 and pet[9] %}
+                                    <!-- Exibe a data da adoção (pet[9]) se o pet foi adotado -->
+                                    <span class="badge bg-info">{{ pet[9] }}</span>
+                                {% else %}
+                                    <span class="text-muted">Não adotado</span>
+                                {% endif %}
+                            </td>
+
+                            <!-- Ações -->
+                            <td>
+                                {% if pet[8] == 0 %}
+                                    <a href="/adotar/{{ pet[0] }}" class="btn btn-success btn-sm mb-1">
+                                        <i class="fas fa-heart"></i> Adotar
+                                    </a>
+                                    <a href="/editar/{{ pet[0] }}" class="btn btn-warning btn-sm mb-1">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+                                    <a href="/excluir/{{ pet[0] }}" class="btn btn-danger btn-sm mb-1">
+                                        <i class="fas fa-trash-alt"></i> Excluir
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">Sem ações disponíveis</span>
+                                {% endif %}
+                            </td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Botão Voltar -->
-        <a href="/" class="btn btn-secondary mt-4">
-            <i class="fas fa-arrow-left"></i> Voltar
-        </a>
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

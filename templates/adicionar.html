@@ -29,8 +29,18 @@
                     <label for="descricao" class="form-label"><i class="fas fa-align-left"></i> Descrição</label>
                     <textarea name="descricao" id="descricao" class="form-control" rows="4" required></textarea>
                 </div>
+                <!-- Novo campo: Nome do responsável -->
+                <div class="mb-3">
+                    <label for="responsavel" class="form-label"><i class="fas fa-user"></i> Nome do Responsável</label>
+                    <input type="text" name="responsavel" id="responsavel" class="form-control" placeholder="Ex: Maria Souza" required>
+                </div>
 
-                 <!-- Exibir foto atual se houver -->
+                <!-- Novo campo: Contato -->
+                <div class="mb-3">
+                    <label for="contato" class="form-label"><i class="fas fa-phone"></i> Contato</label>
+                    <input type="text" name="contato" id="contato" class="form-control" placeholder="(19) 98888-7777" required>
+                </div>
+                <!-- Exibir foto atual se houver -->
                 {% if pet and pet[5] %}
                     <div class="mb-3">
                         <label class="form-label">Foto Atual</label><br>
@@ -53,3 +63,26 @@
     </div>
 </body>
 </html>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const telefone = document.getElementById("contato");
+
+    telefone.addEventListener("input", function(e) {
+        let valor = e.target.value.replace(/\D/g, "");
+        if (valor.length > 11) valor = valor.slice(0, 11);
+
+        if (valor.length > 6) {
+            valor = valor.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, "($1) $2-$3");
+        } else if (valor.length > 2) {
+            valor = valor.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+        } else {
+            valor = valor.replace(/^(\d*)/, "($1");
+        }
+
+        e.target.value = valor;
+    });
+});
+</script>
+
+

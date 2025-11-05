@@ -4,7 +4,7 @@ import sqlite3
 conn = sqlite3.connect('pets.db')
 cursor = conn.cursor()
 
-# Cria a tabela de pets
+# Cria a tabela de pets com os novos campos
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS pets (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -12,9 +12,11 @@ CREATE TABLE IF NOT EXISTS pets (
     idade INTEGER NOT NULL,
     raca TEXT NOT NULL,
     descricao TEXT,
+    foto TEXT,
+    responsavel TEXT,
+    contato TEXT,
     adotado INTEGER DEFAULT 0,
-    data_adocao TEXT,
-    foto TEXT
+    data_adocao TEXT
 );
 ''')
 
@@ -35,4 +37,4 @@ CREATE TABLE IF NOT EXISTS adocoes (
 conn.commit()
 conn.close()
 
-print("✅ Banco de dados 'pets.db' criado com sucesso!")
+print("✅ Banco de dados 'pets.db' criado/atualizado com sucesso!")

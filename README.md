@@ -49,6 +49,9 @@ python app.py
 
 Acesse http://127.0.0.1:5000 no navegador.
 
+9- Executar como Servidor local
+    flask run --host=192.168.0.1 "IP da máquina"
+
 # Adicionar a coluna data_adocao se não existir
 
 import sqlite3
