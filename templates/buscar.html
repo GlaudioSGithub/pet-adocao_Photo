@@ -102,7 +102,7 @@
 
                                 <!-- Status -->
                                 <td>
-                                    {% if pet[6] == 1 %}
+                                    {% if pet[8] == 1 %}
                                         <span class="badge bg-success">
                                             <i class="fas fa-check-circle"></i> Adotado
                                         </span>
@@ -115,8 +115,8 @@
 
                                 <!-- Data da Adoção -->
                                 <td>
-                                    {% if pet[6] == 1 and pet[7] %}
-                                        <span class="badge bg-info text-dark">{{ pet[7] }}</span>
+                                    {% if pet[8] == 1 and pet[7] %}
+                                        <span class="badge bg-info text-dark">{{ pet[9] }}</span>
                                     {% else %}
                                         <span class="text-muted">Não adotado</span>
                                     {% endif %}
@@ -124,7 +124,7 @@
 
                                 <!-- Ações -->
                                 <td>
-                                    {% if pet[6] == 0 %}
+                                    {% if pet[8] == 0 %}
                                         <a href="/adotar/{{ pet[0] }}" class="btn btn-success btn-sm mb-1 w-100">
                                             <i class="fas fa-paw"></i> Adotar
                                         </a>

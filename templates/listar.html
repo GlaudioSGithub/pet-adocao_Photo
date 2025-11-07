@@ -71,7 +71,30 @@
                             <td>{{ pet[3] }}</td>
                             <td>{{ pet[4] }}</td>
                             <td>{{ pet[6] if pet[6] else '-' }}</td>
-                            <td>{{ pet[7] if pet[7] else '-' }}</td>
+                            
+                            <!-- Link WhatsApp -->
+                            <td>
+                                {% if pet[7] %}
+                                    {% if pet[8] == 0 %}
+                                        <!-- Pet disponível: link ativo do WhatsApp -->
+                                        <a href="https://wa.me/55{{ pet[7]|replace('(','')|replace(')','')|replace(' ','')|replace('-','') }}
+                                            ?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20adoção%20do%20{{ pet[1] }}.%20Vi%20ele%20no%20site%20AdotaPets."
+                                            target="_blank"
+                                            class="text-success fw-bold text-decoration-none">
+                                            <i class="fab fa-whatsapp"></i> {{ pet[7] }}
+                                        </a>
+                                    {% else %}
+                                        <!-- Pet adotado: link desativado -->
+                                        <span class="text-muted" style="cursor: not-allowed; opacity: 0.6;">
+                                            <i class="fab fa-whatsapp"></i> {{ pet[7] }}
+                                        </span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="text-muted">Sem contato</span>
+                                {% endif %}
+                            </td>
+
+
 
                             <!-- Status -->
                             <td>

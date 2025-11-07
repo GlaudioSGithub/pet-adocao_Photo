@@ -10,3 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 200 * index);
     });
 });
+
+
+self.addEventListener('install', event => {
+  console.log('Service Worker instalado.');
+});
+
+self.addEventListener('fetch', event => {
+  // Aqui você poderia adicionar cache, se quiser PWA offline
+});
