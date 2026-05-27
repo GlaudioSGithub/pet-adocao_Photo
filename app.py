@@ -4,6 +4,9 @@ import os
 from datetime import datetime
 from werkzeug.utils import secure_filename  # Para garantir nomes de arquivo seguros
 
+
+
+
 app = Flask(__name__)
 
 # Página inicial
