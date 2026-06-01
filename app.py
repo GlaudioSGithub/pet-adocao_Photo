@@ -4,9 +4,6 @@ import os
 from datetime import datetime
 from werkzeug.utils import secure_filename  # Para garantir nomes de arquivo seguros
 
-
-
-
 app = Flask(__name__)
 
 # Página inicial
@@ -24,7 +21,6 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 # Função para verificar se a extensão é permitida
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 # Página para cadastrar e editar pets
 @app.route('/adicionar', methods=['GET', 'POST'])
@@ -77,7 +73,6 @@ def adicionar_pet(id=None):
             pet = cursor.fetchone()
 
     return render_template('adicionar.html', pet=pet)
-
 
 # Rota para buscar pets
 @app.route('/buscar', methods=['GET', 'POST'])
@@ -206,3 +201,7 @@ def listar():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
