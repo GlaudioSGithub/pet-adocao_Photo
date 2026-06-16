@@ -1,6 +1,8 @@
 1- Instalar o Flask:
 
 pip install flask
+python -m pip install flask
+
 
 2- Estrutura:
 

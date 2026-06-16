@@ -1,11 +1,13 @@
 {
   "name": "AdotaPets",
   "short_name": "AdotaPets",
-  "description": "Sistema de adoção de pets",
+  "description": "Sistema de Adoção de Pets",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#0d6efd",
+  "theme_color": "#2196f3",
   "icons": [
     {
       "src": "/static/icons/icon-192.png",
@@ -13,7 +15,7 @@
       "type": "image/png"
     },
     {
-      "src": "/static/icons/icon-512.png",
+      "src": "/static/icons/icon-192.png",
       "sizes": "512x512",
       "type": "image/png"
     }

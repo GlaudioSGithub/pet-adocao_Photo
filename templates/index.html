@@ -50,12 +50,12 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/static/js/script.js')
-        .then(() => console.log('Service Worker registrado'))
-        .catch(err => console.error('Erro ao registrar SW:', err));
-    }
-    </script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/js/service-worker.js')
+    .then(() => console.log('Service Worker registrado'))
+    .catch(err => console.error('Erro ao registrar SW:', err));
+}
+</script>
 
 </body>
 </html>
