@@ -93,3 +93,25 @@ img {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+
+    .pet-foto {
+        width: 100%;
+        max-width: 120px; /* tamanho máximo */
+        height: auto;
+        border-radius: 10px;
+        object-fit: cover;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    /* Efeito suave ao passar o mouse */
+    .pet-foto:hover {
+        transform: scale(1.05);
+    }
+
+    /* Ajuste para telas pequenas */
+    @media (max-width: 576px) {
+        .pet-foto {
+            max-width: 90px;
+        }
+    }

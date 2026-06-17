@@ -27,11 +27,12 @@
                     </label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
+                <!-- Contato -->
                 <div class="mb-3">
-                    <label for="telefone" class="form-label">
-                        <i class="fas fa-phone-alt"></i> Telefone
-                    </label>
-                    <input type="tel" class="form-control" id="telefone" name="telefone" required>
+                    <label for="telefone" class="form-label"><i class="fas fa-phone"></i> Contato</label>
+                    <input type="text" name="telefone" id="telefone" class="form-control"
+                        value="{{ pet[7] if pet|length > 7 else '' }}"
+                        placeholder="(19) 98888-7777" required>
                 </div>
                 <div class="mb-3">
                     <label for="mensagem" class="form-label">
@@ -52,3 +53,38 @@
     </div>
 </body>
 </html>
+
+<!-- Máscara de telefone -->  <!-- Validação e-mail -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const contato = document.getElementById('telefone');
+    if (!contato) return;
+
+    contato.addEventListener('input', function(e) {
+        let x = e.target.value.replace(/\D/g, '').substring(0, 11);
+        let ddd = x.substring(0, 2);
+        let numero = x.substring(2, 7);
+        let restante = x.substring(7, 11);
+
+        if (x.length > 7) {
+            e.target.value = `(${ddd}) ${numero}-${restante}`;
+        } else if (x.length > 2) {
+            e.target.value = `(${ddd}) ${numero}`;
+        } else if (x.length > 0) {
+            e.target.value = `(${ddd}`;
+        }
+    });
+});
+
+
+document.getElementById("email").addEventListener("input", function(e) {
+    const email = e.target.value;
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!pattern.test(email)) {
+        e.target.setCustomValidity("Por favor, insira um e-mail válido (ex: exemplo@dominio.com.br)");
+    } else {
+        e.target.setCustomValidity("");
+    }
+});
+</script>
