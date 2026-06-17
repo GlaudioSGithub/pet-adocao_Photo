@@ -79,7 +79,6 @@ def adicionar_pet(id=None):
 
     return render_template('adicionar.html', pet=pet)
 
-
 # Rota para buscar pets
 @app.route('/buscar', methods=['GET', 'POST'])
 def buscar():
@@ -243,5 +242,14 @@ def listar():
 
     return render_template('listar.html', pets=pets)
 
+@app.route('/sobre')
+def sobre():
+    return render_template('sobre.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+print('testecommit')
+print('testecommit')
